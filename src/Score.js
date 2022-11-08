@@ -1,12 +1,9 @@
 const { Component } = require("react");
 
 class Score extends Component {
-    score = 100;
-
-    render(){
-        return <div>{this.score}</div>
-    }
+  render() {
+    return <div>{this.props.score}</div>;
+  }
 }
-
 
 export default Score;

@@ -2,15 +2,10 @@ const { Component } = require("react");
 const { default: Letter } = require("./Letter");
 
 class Letters extends Component {
-  constructor() {
-    super();
-    this.str = "string in letters";
-  }
   render() {
     return (
       <div>
-        <div>{this.str}</div>
-        <Letter />
+        {Object.keys(this.props.letterStatus).map((l, i)=><Letter status={this.props.letterStatus[l]} key={i} letter={l} />)}
       </div>
     );
   }

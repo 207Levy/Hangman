@@ -1,16 +1,9 @@
 const { Component } = require("react");
 
 class Letter extends Component {
-  constructor(){
-    super();
-    this.letter = "z";
-  }
-
   render() {
-    return <div>{this.letter}</div>;
+    return !this.props.status ? <span className="unselect">{this.props.letter}</span> : <span className="selected">{this.props.letter}</span>;
   }
 }
-
-
 
 export default Letter;

@@ -1,13 +1,30 @@
 import { Component } from "react";
+import Letter from "./Letter";
 
 class Solution extends Component {
-  constructor() {
-    super();
-    this.solution = ["_ ", "_ ", "_ ", "_ "];
-  }
-
   render() {
-    return this.solution.map((letter) => <span>{letter}</span>);
+    return (
+      <div>
+        {this.props.solution.word.split("").map((l) => {
+          if (this.props.letterStatus[l]) {
+            return (
+              <span>
+                <Letter letter={l} />
+              </span>
+            );
+          }
+
+          return (
+            <span>
+              <Letter letter={"_ "} />
+            </span>
+          );
+        })}
+        <div>
+          {this.props.solution.hint}
+        </div>
+      </div>
+    );
   }
 }
 
