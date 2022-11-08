@@ -3,6 +3,7 @@ import Score from "./Score";
 import Letters from "./Letters";
 import Solution from "./Solution";
 import { Component } from "react";
+import EndGame from "./EndGame";
 
 const generateLetterStatuses = () => {
   let letterStatus = {};
@@ -24,6 +25,25 @@ export class App extends Component {
       score: 100,
     };
   }
+
+  isCorrect = (letter) => {
+    let newScore = this.state.score;
+    if (this.state.solution.word.includes(letter)) {
+      newScore += 5;
+    } else {
+      newScore -= 20;
+    }
+
+    return newScore;
+  };
+
+  selectLetter = (letter) => {
+    let letterStatusDup = { ...this.state.letterStatus };
+    letterStatusDup[letter] = true;
+    let newScore = this.isCorrect(letter);
+    this.setState({ letterStatus: letterStatusDup, score: newScore });
+  };
+
   render() {
     return (
       <div className="App">
@@ -32,7 +52,15 @@ export class App extends Component {
           solution={this.state.solution}
           letterStatus={this.state.letterStatus}
         />
-        <Letters letterStatus={this.state.letterStatus} />
+        <Letters
+          selectLetter={this.selectLetter}
+          letterStatus={this.state.letterStatus}
+        />
+        <EndGame
+          word={this.state.solution.word}
+          score={this.state.score}
+          letterStatus={this.state.letterStatus}
+        />
       </div>
     );
   }
